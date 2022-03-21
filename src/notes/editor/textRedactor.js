@@ -31,25 +31,17 @@ function TextRedactor() {
     const {classes} = useStyles();
     const {note, setNote} = useContext(NoteContext);
 
-    const getLast = () => {
-        axios.get('/notes/last').then(
-            res => {
-                setNote(res.data);
-            })
-    }
-
     const sendPostOrPutReq = () => {
         if (note.id !== undefined) {
             axios.put('/notes/' + note.id, note)
-                .then((res)=>{
+                .then((res) => {
                     console.log(res);
                 })
         } else {
-            axios.post('/notes/save', note)
+            axios.post('/notes/', note)
                 .then((res) => {
-                    console.log(res)
+                    setNote(res.data);
                 });
-            getLast();
         }
     }
 
@@ -74,7 +66,7 @@ function TextRedactor() {
                 }}>
                     удалить
                 </UnstyledButton>
-                <UnstyledButton className={classes.buttons} onClick={()=>{
+                <UnstyledButton className={classes.buttons} onClick={() => {
                     sendPostOrPutReq();
                 }}>
                     Сохранить
