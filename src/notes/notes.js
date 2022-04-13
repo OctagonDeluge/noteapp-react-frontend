@@ -1,5 +1,5 @@
-import React, {useState} from "react"
-import Note from "./note/Note";
+import React, {useRef, useState} from "react"
+import Note from "./note/note";
 import Profile from "../profile/profile"
 import TextRedactor from "./editor/textRedactor"
 import {NoteContext} from "./noteContext";
@@ -11,10 +11,11 @@ function Notes() {
         content: ""
     });
     const [notes, setNotes] = useState([]);
+    const inputRef = useRef();
     return (
         <div className="main">
             <Profile/>
-            <NoteContext.Provider value={{note, notes, setNote, setNotes}}>
+            <NoteContext.Provider value={{note, notes, setNote, setNotes, inputRef}}>
                 <Note/>
                 <TextRedactor/>
             </NoteContext.Provider>
