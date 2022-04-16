@@ -101,10 +101,13 @@ function Events() {
     const clearEvents = () => {
         axios.delete('/calendar/' + Date.parse(value.toString()))
             .then(res => {
-                setEvents([]);
+                console.log(schedules);
                 let temp = [...schedules];
-                temp.splice(temp.indexOf(Date.parse(value.toString())),1);
+                const index = temp.indexOf(Date.parse(value.toString()));
+                temp.splice(index,1);
+                console.log(temp);
                 setSchedules(temp);
+                setEvents([]);
             })
     }
 
@@ -118,8 +121,12 @@ function Events() {
             }
         })
             .then(res => {
+                debugger;
             setEvents([...events, res.data]);
-            setSchedules([...schedules, Date.parse(value.toString())]);
+            if(!schedules.includes(Date.parse(value.toString()))) {
+                setSchedules([...schedules, Date.parse(value.toString())]);
+            }
+            console.log(schedules);
             setEvent("");
             })
             .catch(res => {

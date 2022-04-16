@@ -26,7 +26,12 @@ function SignUp() {
         axios.post("/user", {
                 email: values.email,
                 password: values.password
-            })
+            }, {
+                headers: {
+                    'Content-Type': 'application/json',
+                }
+            }
+        )
             .then(res => {
                 form.reset();
                 navigate("/login");
