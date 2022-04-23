@@ -121,12 +121,10 @@ function Events() {
             }
         })
             .then(res => {
-                debugger;
             setEvents([...events, res.data]);
             if(!schedules.includes(Date.parse(value.toString()))) {
                 setSchedules([...schedules, Date.parse(value.toString())]);
             }
-            console.log(schedules);
             setEvent("");
             })
             .catch(res => {
